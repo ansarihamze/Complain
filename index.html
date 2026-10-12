@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Complaint Center</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#home" class="logo">
+        <span class="logo-icon">&#9993;</span>
+        <span>Smart Complaint Center</span>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">&#9776;</button>
+      <nav class="nav" id="nav">
+        <a href="#home">Home</a>
+        <a href="#submit">Submit Complaint</a>
+        <a href="#track">Track Complaint</a>
+        <a href="#categories">Complaint Categories</a>
+        <a href="#contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <section id="home" class="hero">
+    <div class="container">
+      <h1>Your Voice Matters — We Are Here to Help!</h1>
+      <p>Submit your complaint in a few minutes, follow its status with a complaint ID, and help improve the services your community depends on.</p>
+      <div class="hero-buttons">
+        <a href="#submit" class="btn btn-light">Submit a Complaint</a>
+        <a href="#track" class="btn btn-outline">Track Your Complaint</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container info-cards">
+    <div class="card"><div class="icon">&#128221;</div><h3>Easy Complaint Submission</h3><p>Fill in one simple form and get a complaint ID instantly.</p></div>
+    <div class="card"><div class="icon">&#128269;</div><h3>Transparent Complaint Tracking</h3><p>Enter your ID at any time to see the current status.</p></div>
+    <div class="card"><div class="icon">&#9889;</div><h3>Better and Faster Solutions</h3><p>Organised complaints help departments respond quicker.</p></div>
+  </section>
+
+  <!-- STATISTICS -->
+  <section class="container stats" aria-label="Statistics">
+    <div class="stat"><span id="statTotal">0</span><small>Total Complaints</small></div>
+    <div class="stat"><span id="statSubmitted">0</span><small>Submitted</small></div>
+    <div class="stat"><span id="statProgress">0</span><small>In Progress</small></div>
+    <div class="stat"><span id="statResolved">0</span><small>Resolved</small></div>
+  </section>
+
+  <!-- SUBMIT COMPLAINT -->
+  <section id="submit" class="section">
+    <div class="container">
+      <h2>Submit Complaint</h2>
+      <p class="section-sub">Fields marked * are required.</p>
+      <form id="complaintForm" class="form-box" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" placeholder="e.g. Ali Khan">
+            <span class="error" id="errName"></span>
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" placeholder="e.g. 03001234567">
+            <span class="error" id="errPhone"></span>
+          </div>
+          <div class="field">
+            <label for="email">Email Address (optional)</label>
+            <input type="email" id="email" placeholder="name@example.com">
+            <span class="error" id="errEmail"></span>
+          </div>
+          <div class="field">
+            <label for="category">Complaint Category *</label>
+            <select id="category">
+              <option value="">-- Select category --</option>
+              <option>Electricity</option>
+              <option>Water Supply</option>
+              <option>Gas</option>
+              <option>Internet</option>
+              <option>Education</option>
+              <option>Healthcare</option>
+              <option>Road and Sanitation</option>
+              <option>Other</option>
+            </select>
+            <span class="error" id="errCategory"></span>
+          </div>
+          <div class="field">
+            <label for="subject">Complaint Subject *</label>
+            <input type="text" id="subject" placeholder="Short title of the problem">
+            <span class="error" id="errSubject"></span>
+          </div>
+          <div class="field">
+            <label for="location">Location or Department *</label>
+            <input type="text" id="location" placeholder="e.g. Block B, City Hospital">
+            <span class="error" id="errLocation"></span>
+          </div>
+          <div class="field full">
+            <label for="description">Complaint Description *</label>
+            <textarea id="description" rows="5" placeholder="Describe the problem in detail (at least 20 characters)"></textarea>
+            <span class="error" id="errDescription"></span>
+          </div>
+          <div class="field">
+            <label for="priority">Priority *</label>
+            <select id="priority">
+              <option value="">-- Select priority --</option>
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+            </select>
+            <span class="error" id="errPriority"></span>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Complaint</button>
+        <div id="submitMessage" class="message" role="status"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- TRACK COMPLAINT -->
+  <section id="track" class="section grey">
+    <div class="container">
+      <h2>Track Complaint</h2>
+      <p class="section-sub">Enter the complaint ID you received after submitting (example: CMP1001).</p>
+      <div class="form-box track-box">
+        <div class="track-row">
+          <input type="text" id="trackId" placeholder="Enter Complaint ID">
+          <button class="btn btn-primary" id="trackBtn" type="button">Track Complaint</button>
+          <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
+        </div>
+        <div id="trackResult" role="status"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section id="categories" class="section">
+    <div class="container">
+      <h2>Complaint Categories</h2>
+      <p class="section-sub">Click a category to start a complaint in that area.</p>
+      <div class="category-grid" id="categoryGrid">
+        <button class="card cat-card" data-category="Electricity"><div class="icon">&#128161;</div><h3>Electricity</h3><p>Power cuts, billing issues, damaged lines.</p></button>
+        <button class="card cat-card" data-category="Water Supply"><div class="icon">&#128167;</div><h3>Water Supply</h3><p>No water, leakage, dirty water.</p></button>
+        <button class="card cat-card" data-category="Gas"><div class="icon">&#128293;</div><h3>Gas</h3><p>Low pressure, gas leaks, billing.</p></button>
+        <button class="card cat-card" data-category="Internet"><div class="icon">&#127760;</div><h3>Internet</h3><p>Slow speed, outages, connection faults.</p></button>
+        <button class="card cat-card" data-category="Education"><div class="icon">&#127891;</div><h3>Education</h3><p>School or college facilities and staff.</p></button>
+        <button class="card cat-card" data-category="Healthcare"><div class="icon">&#127973;</div><h3>Healthcare</h3><p>Hospital services, medicines, cleanliness.</p></button>
+        <button class="card cat-card" data-category="Road and Sanitation"><div class="icon">&#128739;</div><h3>Road and Sanitation</h3><p>Broken roads, garbage, blocked drains.</p></button>
+        <button class="card cat-card" data-category="Other"><div class="icon">&#128172;</div><h3>Other</h3><p>Anything that does not fit above.</p></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section grey">
+    <div class="container contact-wrap">
+      <div>
+        <h2>Contact Us</h2>
+        <p class="section-sub">Demo details only — not a real office.</p>
+        <ul class="contact-list">
+          <li>&#128205; Demo Address: 123 Sample Street, Demo City</li>
+          <li>&#128222; Demo Phone: 000-0000000</li>
+          <li>&#9993; Demo Email: demo@example.com</li>
+        </ul>
+      </div>
+      <form id="contactForm" class="form-box" novalidate>
+        <div class="field">
+          <label for="cName">Name *</label>
+          <input type="text" id="cName">
+          <span class="error" id="errCName"></span>
+        </div>
+        <div class="field">
+          <label for="cEmail">Email *</label>
+          <input type="email" id="cEmail">
+          <span class="error" id="errCEmail"></span>
+        </div>
+        <div class="field">
+          <label for="cMessage">Message *</label>
+          <textarea id="cMessage" rows="4"></textarea>
+          <span class="error" id="errCMessage"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <div id="contactMessage" class="message" role="status"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Smart Complaint Center</h3>
+        <p>A demo web project where people can submit and track service complaints.</p>
+        <p class="tagline">Helping People, Improving Services.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#home">Home</a>
+        <a href="#submit">Submit Complaint</a>
+        <a href="#track">Track Complaint</a>
+        <a href="#categories">Complaint Categories</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2026 Smart Complaint Center. College project — all rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
